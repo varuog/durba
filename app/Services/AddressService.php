@@ -10,7 +10,7 @@ class AddressService extends BaseService
 {
 
 
-    public function CreateAdds($data)
+    public function createAdds($data)
     {
 
         $address = new Address();
@@ -27,7 +27,7 @@ class AddressService extends BaseService
         return $address;
     }
 
-    public function AddIndex($auth_id)
+    public function addIndex($auth_id)
     {
         $address = Address::where('user_id', $auth_id)->where('is_del', '0')->get();
         return $address;

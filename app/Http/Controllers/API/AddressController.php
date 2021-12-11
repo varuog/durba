@@ -31,13 +31,13 @@ class AddressController extends Controller
             $messages = $validator->messages();
             return $this->addressservice->apiResponse('Here is some error', [], 422, [], $messages);
         }
-        $address = $this->addressservice->CreateAdds($request);
+        $address = $this->addressservice->createAdds($request);
         return $this->apiResponse('New address added to your address book', $address, 200, [], []);
     }
 
     public function addressIndex()
     {
-        $address_list =  $this->addressservice->AddIndex(Auth::user()->id);
+        $address_list =  $this->addressservice->addIndex(Auth::user()->id);
         return  $this->addressservice->apiResponse('Address Book', $address_list, 200, [], []);
     }
 
@@ -58,7 +58,7 @@ class AddressController extends Controller
         }
     }
 
-    public function DelAddress(Request $request)
+    public function delAddress(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'address_id' => 'required',
