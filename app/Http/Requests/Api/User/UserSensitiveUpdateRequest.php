@@ -24,15 +24,14 @@ class UserSensitiveUpdateRequest extends FormRequest
     public function rules()
     {
         $type = $this->route('type');
-        if($type == 'email') {
-           $idRule = '|email';
-        } else if($type == 'mobile') {
+        if ($type == 'email') {
+            $idRule = '|email';
+        } elseif ($type == 'mobile') {
             $idRule = '|string';
         }
         return [
             'field' => "required|{$idRule}",
             'otp' => 'required|string',
         ];
-        
     }
 }

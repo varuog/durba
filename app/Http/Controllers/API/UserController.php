@@ -22,19 +22,19 @@ class UserController extends Controller
 
     public function registration(Request $request)
     {
-       $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'deviceName' => 'required',
-            'deviceId'=> 'required',
+            'deviceId' => 'required',
             'deviceToken' => 'required',
             'deviceType' => 'required',
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             $messages = $validator->messages();
-            return $this->apiResponse('Here is some error',[],422,[],$messages);
+            return $this->apiResponse('Here is some error', [], 422, [], $messages);
         }
         $data = [];
         $data['first_name'] = $request->first_name;
@@ -46,45 +46,44 @@ class UserController extends Controller
         $data['deviceId'] = $request->deviceId;
         $data['deviceToken'] = $request->deviceToken;
         $data['deviceType'] = $request->deviceType;
-        $data['user_id'] = $userObj->id; 
+        $data['user_id'] = $userObj->id;
         $this->userservice->createFcm($data);
         $userObj->token = $userObj->createToken($userObj->email)->accessToken->token;
         $welcome = new WelcomeMail();
-        $this->fireMail($userObj->email,$welcome,null);
-        return $this->apiResponse('You have been Sucessfully Registered',new UserResource($userObj),201,[],[]);
+        $this->fireMail($userObj->email, $welcome, null);
+        return $this->apiResponse('You have been Sucessfully Registered', new UserResource($userObj), 201, [], []);
     }
 
     public function login(Request $request)
     {
-       
-        $validator = Validator::make(request()->all(),[
+
+        $validator = Validator::make(request()->all(), [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string', 'min:8'],
             'deviceName' => 'required',
-            'deviceId'=> 'required',
+            'deviceId' => 'required',
             'deviceToken' => 'required',
             'deviceType' => 'required',
         ]);
-        if ($validator->fails()) { 
+        if ($validator->fails()) {
             $messages = $validator->messages();
-            return $this->apiResponse('Here is some error',new \StdClass(),401,[],$messages);
-        }  
-        
+            return $this->apiResponse('Here is some error', new \StdClass(), 401, [], $messages);
+        }
+
         $user = $this->userservice->Checkauth($request->email, $request->password);
         $data = [];
-        if($user)
-        {
-        $data['deviceName'] = $request->deviceName;
-        $data['deviceId'] = $request->deviceId;
-        $data['deviceToken'] = $request->deviceToken;
-        $data['deviceType'] = $request->deviceType;
-        $data['user_id'] = $user->id;
-        $this->userservice->checkfcm($data);
+        if ($user) {
+            $data['deviceName'] = $request->deviceName;
+            $data['deviceId'] = $request->deviceId;
+            $data['deviceToken'] = $request->deviceToken;
+            $data['deviceType'] = $request->deviceType;
+            $data['user_id'] = $user->id;
+            $this->userservice->checkfcm($data);
         }
-        if($user) {
-            return $this->apiResponse('Welcome',new UserResource($user),200,[],[]);        
+        if ($user) {
+            return $this->apiResponse('Welcome', new UserResource($user), 200, [], []);
         } else {
-            return $this->apiResponse('Credentials does not match',[],401,[],['message'=>[__('Credentials does not match')]]);
+            return $this->apiResponse('Credentials does not match', [], 401, [], ['message' => [__('Credentials does not match')]]);
         }
     }
 
@@ -92,8 +91,8 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $data = $request->all();
-        $user = $this->userservice->updateProfile($user,$data);
-        return $this->apiResponse('Your profile is updated',new UserResource($user),200,[],[]);
+        $user = $this->userservice->updateProfile($user, $data);
+        return $this->apiResponse('Your profile is updated', new UserResource($user), 200, [], []);
     }
 
     public function logout(Request $request)
@@ -104,12 +103,12 @@ class UserController extends Controller
         ]);
         if ($validator->fails()) {
             $messages = $validator->messages();
-            return $this->apiResponse('Here is some error',new \StdClass(),401,[],$messages);
+            return $this->apiResponse('Here is some error', new \StdClass(), 401, [], $messages);
         }
         $token = $request->user()->token();
         $token->revoke();
         $this->userservice->delfcm($request->device_token);
-        return $this->apiResponse('Logged out',[],200,[],[]);
+        return $this->apiResponse('Logged out', [], 200, [], []);
     }
 
     public function forgotPasswd(Request $request)
@@ -119,16 +118,14 @@ class UserController extends Controller
         ]);
         if ($validator->fails()) {
             $messages = $validator->messages();
-            return $this->apiResponse('Here is some error',new \StdClass(),401,[],$messages);
+            return $this->apiResponse('Here is some error', new \StdClass(), 401, [], $messages);
         }
         $reset = $this->userservice->forgotpasswd($request, $request->email);
-        if($reset)
-        {
-            return $this->apiResponse('Password reset Otp has been sent to your registered email',[],200,[],[]);
-         }else{
-            return $this->apiResponse('This mail is not registered',[],200,[],[]);
-         }
-
+        if ($reset) {
+            return $this->apiResponse('Password reset Otp has been sent to your registered email', [], 200, [], []);
+        } else {
+            return $this->apiResponse('This mail is not registered', [], 200, [], []);
+        }
     }
 
     public function checkOtp(Request $request)
@@ -139,10 +136,10 @@ class UserController extends Controller
         ]);
         if ($validator->fails()) {
             $messages = $validator->messages();
-            return $this->apiResponse('Here is some error',new \StdClass(),401,[],$messages);
+            return $this->apiResponse('Here is some error', new \StdClass(), 401, [], $messages);
         }
 
-        return $this->userservice->matchOtp($request->email,$request->otp);
+        return $this->userservice->matchOtp($request->email, $request->otp);
     }
 
     public function changePassword(Request $request)
@@ -153,9 +150,9 @@ class UserController extends Controller
         ]);
         if ($validator->fails()) {
             $messages = $validator->messages();
-            return $this->apiResponse('Here is some error',new \StdClass(),401,[],$messages);
+            return $this->apiResponse('Here is some error', new \StdClass(), 401, [], $messages);
         }
-        return $this->userservice->Updatepassword($request->user_id,$request->password);
+        return $this->userservice->Updatepassword($request->user_id, $request->password);
     }
 
     public function resendOtp(Request $request)

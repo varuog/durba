@@ -15,9 +15,14 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRolesAndAbilities, InteractsWithMedia;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
+    use HasRolesAndAbilities;
+    use InteractsWithMedia;
 
-    
+
     public const MEDIA_COL_PROFILE = 'profile';
     public const MEDIA_CON_THUMB = 'thumb';
 
@@ -54,42 +59,48 @@ class User extends Authenticatable implements HasMedia
 
     protected $appends = ['profile_picture', 'full_name'];
 
-  
+
     /**
      * @todo social images
      */
-    public function getProfilePictureAttribute(){
+    public function getProfilePictureAttribute()
+    {
         $profilePic = $this->getMedia(static::MEDIA_COL_PROFILE)->first();
-        if($profilePic) {
+        if ($profilePic) {
             return $profilePic->getUrl(static::MEDIA_CON_THUMB);
-        } 
+        }
 
         return asset('images/no_pic.png');
     }
 
 
-    public function getFullNameAttribute() {
-        return sprintf('%s %s'
-            , $this->attributes['first_name'] ?? ''
-            , $this->attributes['last_name'] ?? '' );
+    public function getFullNameAttribute()
+    {
+        return sprintf(
+            '%s %s',
+            $this->attributes['first_name'] ?? '',
+            $this->attributes['last_name'] ?? ''
+        );
     }
 
 
-    public function addresses(){
-        return $this->hasMany(Address::class,'user_id');
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id');
     }
 
-    public function deviceTokens() {
+    public function deviceTokens()
+    {
         return $this->hasMany(DeviceToken::class);
     }
 
-    public function userSocialAccounts() {
+    public function userSocialAccounts()
+    {
         return $this->hasMany(UserSocialAccount::class);
     }
 
-    public function userProfile() {
+    public function userProfile()
+    {
         return $this->hasOne(UserProfile::class)->withDefault();
     }
-
-
 }

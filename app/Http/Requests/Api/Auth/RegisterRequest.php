@@ -15,7 +15,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize()
     {
-       return true;
+        return true;
     }
 
     /**
@@ -25,14 +25,14 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
-      return [
+        return [
             'email' => ['sometimes' , 'string', Rule::unique('users', 'email')->where(function ($query) {
                 return $query->whereNull('deleted_at');
             })],
             'password' => ['required' ,'string', 'confirmed', Password::min(8)->mixedCase()],
             'mobile' => ['required' , 'string', Rule::unique('users', 'mobile')->where(function ($query) {
                     return $query->whereNull('deleted_at');
-                })],
+            })],
             'first_name' => 'required|string',
             'middle_name' => 'sometimes|string|nullable',
             'last_name' => 'required|string',

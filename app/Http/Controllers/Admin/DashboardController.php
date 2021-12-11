@@ -23,7 +23,7 @@ class DashboardController extends Controller
         return view('dashboard.dashboard');
     }
 
-    public function updateProfile(){
-        
+    public function updateProfile()
+    {
     }
 }

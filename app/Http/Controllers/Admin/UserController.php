@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     protected UserService $userService;
     protected RbacService $rbacService;
-    
+
     public function __construct(UserService $userService, RbacService $rbacService)
     {
         $this->middleware('auth');
@@ -37,7 +37,6 @@ class UserController extends Controller
 
         //dd($users, $allRoles);
         return view('user.list', compact('users', 'allRoles'));
-
     }
 
     /**
@@ -69,9 +68,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        
+
         $allRoles = $this->rbacService->searchRole([], [], false);
-        $allAbilities = $this->rbacService->searchAbilities([],[], false)
+        $allAbilities = $this->rbacService->searchAbilities([], [], false)
             ->groupBy('group')
             ->filter(function ($value, $key) {
                 //dd($key);
@@ -117,7 +116,8 @@ class UserController extends Controller
         //
     }
 
-    public function assignRole(Request $request, User $user) {
+    public function assignRole(Request $request, User $user)
+    {
         $rolesId = $request->input('roles_id', []);
         //dd($rolesId);
         $roles = $this->rbacService->fetchRolesById($rolesId);
@@ -127,7 +127,8 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function assignAbility(Request $request, User $user) {
+    public function assignAbility(Request $request, User $user)
+    {
         $abilitiesId = $request->input('abilities_id', []);
         //dd($rolesId);
         $abilities = $this->rbacService->fetchAbilitiesById($abilitiesId);

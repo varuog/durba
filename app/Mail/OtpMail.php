@@ -9,7 +9,8 @@ use Illuminate\Queue\SerializesModels;
 
 class OtpMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
@@ -29,7 +30,7 @@ class OtpMail extends Mailable
     public function build()
     {
         return $this->view('emails.otp')
-        ->from(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'))
+        ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
         ->subject('Forgot Password OTP')
         ->with($this->content);
     }

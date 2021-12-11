@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use App\Services\AddressService;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+
 class AddressController extends Controller
 {
     protected $addressservice;
     public function __construct(AddressService $addressservice)
     {
         return $this->addressservice = $addressservice;
-        
     }
     public function addAddress(Request $request)
     {
@@ -23,11 +23,11 @@ class AddressController extends Controller
             'street_no' => ['required', 'string'],
             'house_flat_no' => ['required', 'string'],
             'landmark' => ['required','string'],
-            'latitude'=> 'required',
+            'latitude' => 'required',
             'longitude' => 'required',
             'is_default' => 'required',
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             $messages = $validator->messages();
             return $this->addressservice->apiResponse('Here is some error', [], 422, [], $messages);
         }
@@ -39,7 +39,6 @@ class AddressController extends Controller
     {
         $address_list =  $this->addressservice->AddIndex(Auth::user()->id);
         return  $this->addressservice->apiResponse('Address Book', $address_list, 200, [], []);
-        
     }
 
     public function updateAddress(Request $request)
@@ -47,14 +46,14 @@ class AddressController extends Controller
         $validator = Validator::make($request->all(), [
             'address_id' => 'required',
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             $messages = $validator->messages();
             return $this->addressservice->apiResponse('Here is some error', [], 422, [], $messages);
         }
         $address = $this->addressservice->updateadd($request);
-        if($address!=null){
-            return $this->addressservice->apiResponse('Address Updated', $address,200, [], []);
-        }else{
+        if ($address != null) {
+            return $this->addressservice->apiResponse('Address Updated', $address, 200, [], []);
+        } else {
             return $this->addressservice->apiResponse('Unable to update address', [], 402, [], []);
         }
     }
@@ -64,15 +63,15 @@ class AddressController extends Controller
         $validator = Validator::make($request->all(), [
             'address_id' => 'required',
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             $messages = $validator->messages();
             return $this->apiResponse('Here is some error', [], 422, [], $messages);
         }
         $address = $this->addressservice->deladd($request);
-        if($address){
-          return  $this->addressservice->apiResponse('Your address deleted', [] ,200, [], []);
-        }else{
-          return  $this->addressservice->apiResponse('Address not found', [], 404, [], []);
+        if ($address) {
+            return  $this->addressservice->apiResponse('Your address deleted', [], 200, [], []);
+        } else {
+            return  $this->addressservice->apiResponse('Address not found', [], 404, [], []);
         }
     }
 }

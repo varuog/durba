@@ -42,7 +42,7 @@
     },
     "scripts": {
         "cs:test" : "phpcs --standard=PSR12 app",
-        "cs:fix" : "phpcs --standard=PSR12 app",
+        "cs:fix" : "phpcbf --standard=PSR12 app",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

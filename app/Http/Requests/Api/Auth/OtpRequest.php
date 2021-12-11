@@ -26,11 +26,11 @@ class OtpRequest extends FormRequest
         $rule = [
             'type' => 'required|string|in:email,mobile'
         ];
-        if($this->type == 'email') {
+        if ($this->type == 'email') {
             array_merge($rule, [
                 'identifier' => 'required|string|email',
             ]);
-        } else if($this->type == 'mobile'){
+        } elseif ($this->type == 'mobile') {
             array_merge($rule, [
                 'identifier' => 'required|string', //@todo mobile validation
             ]);
@@ -39,7 +39,7 @@ class OtpRequest extends FormRequest
                 'identifier' => 'required|string',
             ]);
         }
-        //dd($rule);  
+        //dd($rule);
         return $rule;
     }
 }
