@@ -70,7 +70,7 @@ class UserController extends Controller
             return $this->apiResponse('Here is some error', new \StdClass(), 401, [], $messages);
         }
 
-        $user = $this->userservice->Checkauth($request->email, $request->password);
+        $user = $this->userservice->checkauth($request->email, $request->password);
         $data = [];
         if ($user) {
             $data['deviceName'] = $request->deviceName;
@@ -152,7 +152,7 @@ class UserController extends Controller
             $messages = $validator->messages();
             return $this->apiResponse('Here is some error', new \StdClass(), 401, [], $messages);
         }
-        return $this->userservice->Updatepassword($request->user_id, $request->password);
+        return $this->userservice->updatepassword($request->user_id, $request->password);
     }
 
     public function resendOtp(Request $request)
