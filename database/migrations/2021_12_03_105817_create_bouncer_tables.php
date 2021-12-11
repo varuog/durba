@@ -19,7 +19,8 @@ class CreateBouncerTables extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('title')->nullable();
-            $table->string('group')->nullable();
+            $table->string('group')->nullable()->comment('Custom added to group abilities');
+            $table->integer('level')->unsigned()->nullable()->comment('Custom level, equivalant of role level priority');
             $table->bigInteger('entity_id')->unsigned()->nullable();
             $table->string('entity_type')->nullable();
             $table->boolean('only_owned')->default(false);

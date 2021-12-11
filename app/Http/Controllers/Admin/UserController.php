@@ -33,7 +33,7 @@ class UserController extends Controller
         $sort['order'] = request()->query('order', 'desc');
 
         $users = $this->userService->search($filter, $sort);
-        $allRoles = $this->rbacService->search([], [], false);
+        $allRoles = $this->rbacService->searchRole([], [], false);
 
         //dd($users, $allRoles);
         return view('user.list', compact('users', 'allRoles'));
@@ -69,7 +69,18 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        
+        $allRoles = $this->rbacService->searchRole([], [], false);
+        $allAbilities = $this->rbacService->searchAbilities([],[], false)
+            ->groupBy('group')
+            ->filter(function ($value, $key) {
+                //dd($key);
+                return !empty($key);
+            });
+        //dd($allAbilities);
+
+        //dd(auth()->user()->getRoles());
+        return view('user.show', compact('user', 'allAbilities', 'allRoles'));
     }
 
     /**
@@ -107,10 +118,20 @@ class UserController extends Controller
     }
 
     public function assignRole(Request $request, User $user) {
-        $rolesId = $request->input('roles_id');
+        $rolesId = $request->input('roles_id', []);
         //dd($rolesId);
-        $roles = $this->rbacService->fetchByIdList($rolesId);
+        $roles = $this->rbacService->fetchRolesById($rolesId);
         $this->userService->assignRoles($user, $roles);
+
+        //session()->flash('message-success')
+        return redirect()->back();
+    }
+
+    public function assignAbility(Request $request, User $user) {
+        $abilitiesId = $request->input('abilities_id', []);
+        //dd($rolesId);
+        $abilities = $this->rbacService->fetchAbilitiesById($abilitiesId);
+        $this->userService->assignAbilities($user, $abilities);
 
         //session()->flash('message-success')
         return redirect()->back();

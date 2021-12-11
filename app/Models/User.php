@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
+use Socket;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -54,6 +55,9 @@ class User extends Authenticatable implements HasMedia
     protected $appends = ['profile_picture', 'full_name'];
 
   
+    /**
+     * @todo social images
+     */
     public function getProfilePictureAttribute(){
         $profilePic = $this->getMedia(static::MEDIA_COL_PROFILE)->first();
         if($profilePic) {
@@ -78,5 +82,14 @@ class User extends Authenticatable implements HasMedia
     public function deviceTokens() {
         return $this->hasMany(DeviceToken::class);
     }
+
+    public function userSocialAccounts() {
+        return $this->hasMany(UserSocialAccount::class);
+    }
+
+    public function userProfile() {
+        return $this->hasOne(UserProfile::class)->withDefault();
+    }
+
 
 }

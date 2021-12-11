@@ -83,6 +83,16 @@ const AUTH_ERR_OTP = 2;
     //     return User::where('mobile', $mobile)->firstOrFail();
     // }
 
+      
+    public function fetchUserByRole($role, $isPaginate = false){
+        if($isPaginate) {
+            return User::whereIs($role)->paginate(10);
+        } else {
+            return User::whereIs($role)->get();
+        }
+        
+    }
+
     public function fetchByEmail(String $email) : User {
         return User::where('email', $email)->firstOrFail();
     }
@@ -120,10 +130,6 @@ const AUTH_ERR_OTP = 2;
     }
 
   
-    public function getUserByRole($role){
-        return User::role($role)->paginate(10);
-        
-    }
 
     public function assignRoles(User $user, $roles) {
         //dd($roles);
@@ -145,4 +151,23 @@ const AUTH_ERR_OTP = 2;
         return $user;
     }
 
+    public function assignAbilities(User $user, $abilities) {
+        //dd($roles);
+        try {
+            DB::transaction(function() use($user,  $abilities) {
+                foreach($user->getAbilities() as $ability) {
+                    $user->disallow($ability);
+                }
+        
+                foreach($abilities as $ability) {
+                    $user->allow($ability);
+                }
+            });
+        } catch(\Exception $exp) {
+            dd($exp);
+        }
+       
+
+        return $user;
+    }
 }

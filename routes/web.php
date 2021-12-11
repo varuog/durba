@@ -32,6 +32,8 @@ Route::prefix('superadmin')
         Route::resource('users', UserController::class);
         Route::post('users/{user}/assign-role', [UserController::class, 'assignRole'])
             ->name('users.assign-role');
+        Route::post('users/{user}/assign-ability', [UserController::class, 'assignAbility'])
+            ->name('users.assign-ability');
         //Route::get('/updateprofile', DashboardController::class, 'updateProfile')->name('updateprofile');
 });
 

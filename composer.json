@@ -14,16 +14,19 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "silber/bouncer": "v1.0.0-rc.11",
+        "spatie/laravel-activitylog": "^3.17",
         "spatie/laravel-medialibrary": "9.0.0",
         "spatie/laravel-translatable": "^4.6"
     },
     "require-dev": {
+        "behat/behat": "^3.10",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
-        "phpunit/phpunit": "^9.5.10"
+        "phpunit/phpunit": "^9.5.10",
+        "squizlabs/php_codesniffer": "3.*"
     },
     "autoload": {
         "psr-4": {
@@ -38,6 +41,8 @@
         }
     },
     "scripts": {
+        "cs:test" : "phpcs --standard=PSR12 app",
+        "cs:fix" : "phpcs --standard=PSR12 app",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

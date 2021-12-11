@@ -76,7 +76,7 @@ class BouncerSeeder extends Seeder
         ];
 
         foreach($modules as $module => $abilities) {
-            foreach($abilities as $module => $ability) {
+            foreach($abilities as $ability) {
                 Bouncer::ability()->firstOrCreate([
                     'name' => Str::slug($ability),
                     'title' => $ability,
