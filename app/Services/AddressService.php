@@ -6,13 +6,9 @@ use App\Services\BaseService;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 
-class AddressService extends BaseService
-{
-
-
-    public function createAdds($data)
-    {
-
+class AddressService extends BaseService {
+    public function CreateAdds($data){
+        
         $address = new Address();
         $address->user_id = Auth::user()->id;
         $address->address_type = $data->address_type;

@@ -12,7 +12,6 @@ class UserController extends Controller
 {
     protected UserService $userService;
     protected RbacService $rbacService;
-
     public function __construct(UserService $userService, RbacService $rbacService)
     {
         $this->middleware('auth');

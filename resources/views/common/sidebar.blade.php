@@ -70,6 +70,7 @@
                 </li>
               @endcan
             </ul>
+<<<<<<< HEAD
             <!-- /User Module -->         
           </li>
 
@@ -111,6 +112,11 @@
             </ul>
             <!-- /User Module -->          
           </li>
+=======
+            <!-- /User Module -->            
+          </li>
+
+>>>>>>> 7766093ee60648fea3ac23c042739a97febd1083
           {{-- <li class="nav-header">CMS MANAGEMENT</li>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">

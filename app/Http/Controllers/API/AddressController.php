@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Services\AddressService;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-
 class AddressController extends Controller
 {
     protected $addressservice;
