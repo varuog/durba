@@ -10,6 +10,8 @@ use App\Http\Resources\User\UserResource;
 use Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
+use App\Services\CartService;
+use Varuog\DurbaEcommerce\Services\CartService as ServicesCartService;
 
 class UserController extends Controller
 {

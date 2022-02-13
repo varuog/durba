@@ -26,7 +26,9 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10",
-        "squizlabs/php_codesniffer": "3.*"
+        "squizlabs/php_codesniffer": "3.*",
+        "varuog/durba-ecommerce": "dev-master",
+        "varuog/durba-cms": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -57,6 +59,16 @@
             "@php artisan key:generate --ansi"
         ]
     },
+    "repositories": [
+        {
+          "type": "path",
+          "url": "../durba-ecommerce"
+        },
+        {
+            "type": "path",
+            "url": "../durba-cms"
+          }
+      ],
     "extra": {
         "laravel": {
             "dont-discover": []
