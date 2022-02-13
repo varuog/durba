@@ -58,14 +58,6 @@
         ]
     },
     "repositories": [
-        {
-          "type": "path",
-          "url": "../durba-ecommerce"
-        },
-        {
-            "type": "path",
-            "url": "../durba-cms"
-          }
       ],
     "extra": {
         "laravel": {
