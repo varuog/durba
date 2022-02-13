@@ -70,6 +70,7 @@
                 </li>
               @endcan
             </ul>
+<<<<<<< HEAD
             <!-- /User Module -->         
           </li>
 
@@ -110,6 +111,49 @@
               @endcan
             </ul>
             <!-- /User Module -->          
+          </li>
+            <!-- /User Module -->         
+          </li>
+
+   <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                  Roles & Ability
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a> 
+
+              <!-- User Module -->
+            <ul class="nav nav-treeview">
+              @can('add-user')
+                <li class="nav-item">
+                  <a href="{{route('admin.users.create')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Role</p>
+                  </a>
+                </li>
+              @endcan
+              @can('search-user')
+                <li class="nav-item">
+                  <a href="{{route('admin.users.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Search Role</p>
+                  </a>
+                </li>
+              @endcan
+              @can('search-user')
+                <li class="nav-item">
+                  <a href="{{route('admin.users.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Search Ability</p>
+                  </a>
+                </li>
+              @endcan
+            </ul>
+            <!-- /User Module -->          
+          </li>
+            <!-- /User Module -->            
           </li>
           {{-- <li class="nav-header">CMS MANAGEMENT</li>
           <li class="nav-item menu-open">
