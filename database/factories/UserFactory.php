@@ -35,7 +35,7 @@ class UserFactory extends Factory
             'password' => Hash::make('Password@123'),
             'remember_token' => Str::random(10),
             'dob' => $this->faker->date(),
-            'gender' => $this->faker->randomElement(config('blueprintecom.user.genders')),
+            'gender' => $this->faker->randomElement(config('durba.user.genders')),
         ];
     }
 

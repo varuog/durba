@@ -28,7 +28,7 @@ class UserUpdateRequest extends FormRequest
             'middle_name' => 'sometimes|string',
             'last_name' => 'required|string',
             'dob' => 'required|date',
-            'gender' => 'required|in:' . implode(',', config('blueprintecom.user.genders')),
+            'gender' => 'required|in:' . implode(',', config('durba.user.genders')),
         ];
     }
 }

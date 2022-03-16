@@ -24,7 +24,7 @@ class CmsMetaFactory extends Factory
     public function definition()
     {
         $name = $this->faker->sentence();
-        $type = $this->faker->randomElement(config('blueprintecom.cms.meta-types'));
+        $type = $this->faker->randomElement(config('durba-cms.meta-types'));
         //['image', 'text', 'string', 'numeric', 'date']
 
         if($type == 'numeric') {

@@ -37,7 +37,7 @@ class RegisterRequest extends FormRequest
             'middle_name' => 'sometimes|string|nullable',
             'last_name' => 'required|string',
             'otp' => 'required|string',
-            "social_provider" => "sometimes|string|in:" . implode(',', config('blueprintecom.user.social-providers')),
+            "social_provider" => "sometimes|string|in:" . implode(',', config('durba.user.social-providers')),
             "social_token" => 'sometimes|string|required_with:social_provider'
         ];
     }
