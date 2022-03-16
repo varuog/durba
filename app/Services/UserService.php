@@ -14,10 +14,12 @@ use Hash;
 use RuntimeException;
 use Traversable;
 use DB;
+use App\Services\Contracts\UserServiceInterface;
+
 /**
  * @todo work in progress
  */
-class UserService {
+class UserService implements UserServiceInterface {
 
     public const AUTH_ERR_OTP = 2;
 

@@ -16,7 +16,8 @@
         "silber/bouncer": "v1.0.0-rc.11",
         "spatie/laravel-activitylog": "^3.17",
         "spatie/laravel-medialibrary": "9.0.0",
-        "spatie/laravel-translatable": "^4.6"
+        "spatie/laravel-translatable": "^4.6",
+        "varuog/durba-cms": "dev-master"
     },
     "require-dev": {
         "behat/behat": "^3.10",
@@ -28,6 +29,12 @@
         "phpunit/phpunit": "^9.5.10",
         "squizlabs/php_codesniffer": "3.*"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../durba-cms"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+use Varuog\DurbaCms\Http\Controllers\Admin\CmsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,7 @@ Route::prefix('superadmin')
             ->name('dashboard')
             ->can('view-dashboard');;
         Route::resource('users', UserController::class);
+        // Route::resource('cms', CmsController::class);
         Route::post('users/{user}/assign-role', [UserController::class, 'assignRole'])
             ->name('users.assign-role');
         Route::post('users/{user}/assign-ability', [UserController::class, 'assignAbility'])

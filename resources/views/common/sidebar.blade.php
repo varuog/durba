@@ -155,32 +155,26 @@
           </li>
             <!-- /User Module -->            
           </li>
-          {{-- <li class="nav-header">CMS MANAGEMENT</li>
+          <li class="nav-header">CMS MANAGEMENT</li>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                CMS Page
+                CMS Pages
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <!-- User Module -->
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('admin.cmspages.index')}}" class="nav-link">
+              <li class="nav-item"> 
+                <a href="{{route('admin.cms.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>CMS Page List</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{route('admin.cmspages.create')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add CMS Page</p>
-                </a>
-              </li>
             </ul>
             <!-- /User Module -->            
-          </li> --}}
+          </li> 
 
           {{-- <li class="nav-header">ROLE MANAGEMENT</li>
 

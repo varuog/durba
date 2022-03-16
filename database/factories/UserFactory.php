@@ -2,11 +2,22 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Hash;
+use Illuminate\Support\Arr;
 
 class UserFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = User::class;
+
     /**
      * Define the model's default state.
      *
@@ -15,11 +26,16 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
+            'first_name' => $this->faker->firstName(),
+            // 'last_name' => $this->faker->middle,
+            'last_name' => $this->faker->lastName(),
+            'mobile' => $this->faker->unique()->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => Hash::make('Password@123'),
             'remember_token' => Str::random(10),
+            'dob' => $this->faker->date(),
+            'gender' => $this->faker->randomElement(config('blueprintecom.user.genders')),
         ];
     }
 
@@ -34,6 +50,22 @@ class UserFactory extends Factory
             return [
                 'email_verified_at' => null,
             ];
+        });
+    }
+
+     /**
+     * Configure the model factory.
+     *
+     * @return $this
+     */
+    public function configure()
+    {
+        return $this->afterMaking(function (User $user) {
+            //
+        })->afterCreating(function (User $user) {
+
+            $roles=['customer', 'retail', 'admin', 'delivery agent'];
+            $user->assign(Arr::random($roles));
         });
     }
 }

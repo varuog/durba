@@ -15,11 +15,16 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('key')->unique();
-            $table->string('title');            
-            $table->enum('type', ['numeric', 'string', 'bool', 'media'])
-                ->deault('string');
-            $table->string('content')->nullable();            
+            $table->string('slug')->index();
+            $table->string('title');
+            $table->string('group')
+                ->default('user')
+                ->comment('to group settings')
+                ->index();
+            $table->enum('type', config('durba.user.setting-types'));
+            $table->string('default_value')->comment('default value as init');
+            $table->unique(['slug', 'group']);
+
             $table->timestamps();
         });
     }
