@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Setting;
+use App\Models\Settings;
 use Illuminate\Database\Seeder;
 
 class SettingSeeder extends Seeder
@@ -29,6 +29,6 @@ class SettingSeeder extends Seeder
                 ]
             ];
 
-        Setting::insert($settings);
+            //Settings::insert($settings);
     }
 }

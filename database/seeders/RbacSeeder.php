@@ -73,6 +73,6 @@ class RbacSeeder extends Seeder
         /**
          * Assignments
          */
-        Bouncer::allow('superadmin')->everything();
+        Bouncer::allow(User::ROLE_SUPERADMIN)->everything();
     }
 }

@@ -20,6 +20,9 @@
   <!-- Tree View -->
   <link rel="stylesheet" href="{{asset('admin/css/bootstrap-treeview.min.css')}}">
 
+  <!-- Dynamic Tree -->
+  <script src="{{asset('admin/css/jqtree.css')}}"></script>
+
 </head>
 <!--
 `body` tag options:
@@ -70,8 +73,14 @@
       <b>Version</b> 3.1.0
     </div>
    
-    <!-- <div class="toast" data-type="error">ssadwad</div></div> -->
-
+    <!-- Global action message -->
+    @if(session()->has('message-success'))
+    <div class="toast" data-type="success">{{session()->get('message-success')}}</div>
+    @endif
+    @if($errors->has('message-error'))
+            <div class="toast" data-type="error">{{$errors->first('message-error')}}</div>
+    @endif
+    <!-- /Global action message -->
 
 
   </footer>
@@ -120,6 +129,8 @@
 <script src="{{asset('admin/js/pages/dashboard3.js')}}"></script>
 <!-- Tree View -->
 <script src="{{asset('admin/js/bootstrap-treeview.min.js')}}"></script>
+<!-- Dynamic Tree -->
+<script src="{{asset('admin/js/tree.jquery.js')}}"></script>
 
 @include('common.message-alert')
 @yield('script')

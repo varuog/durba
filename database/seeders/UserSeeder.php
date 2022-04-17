@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
         $user->save();
-        $user->assign('Super Admin');
+        $user->assign(User::ROLE_SUPERADMIN);
 
         $user = new User([
             //'user_type' => 1,
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
         $user->save();
-        $user->assign('Admin');
+        $user->assign(User::ROLE_ADMIN);
 
 
         $user = new User([
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
         $user->save();
-        $user->assign('User');
+        $user->assign(User::ROLE_USER);
 
         $user = new User([
             //'user_type' => 1,
@@ -62,7 +62,7 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
         $user->save();
-        $user->assign('User');
+        $user->assign(User::ROLE_USER);
 
     }
 }

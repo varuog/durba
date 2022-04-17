@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\DurbaCmsDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,10 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             BouncerSeeder::class,
+            SettingSeeder::class,
             UserSeeder::class,
+            DurbaCmsDatabaseSeeder::class,
+            CategorySeeder::class,
         ]);
     }
 }

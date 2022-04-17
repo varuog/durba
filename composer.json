@@ -16,8 +16,8 @@
         "silber/bouncer": "v1.0.0-rc.11",
         "spatie/laravel-activitylog": "^3.17",
         "spatie/laravel-medialibrary": "9.0.0",
-        "spatie/laravel-translatable": "^4.6",
-        "varuog/durba-cms": "dev-master"
+        "varuog/durba-cms": "dev-master",
+        "rinvex/laravel-categories": "^5.0"
     },
     "require-dev": {
         "behat/behat": "^3.10",

@@ -25,6 +25,11 @@ class User extends Authenticatable implements HasMedia
 
     public const MEDIA_COL_PROFILE = 'profile';
     public const MEDIA_CON_THUMB = 'thumb';
+    
+    public const ROLE_SUPERADMIN = 'superadmin';
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_USER = 'user';
+
 
     /**
      * The attributes that are mass assignable.

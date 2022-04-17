@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\DashboardController;
@@ -26,11 +27,13 @@ Route::prefix('superadmin')
     ->name('admin.')
     ->group(function () {
         Route::get('/', DashboardController::class)
-            ->name('dashboard')
-            ->can('view-dashboard');
+            ->name('dashboard');
+            //->can('view-dashboard');
         Route::get('/dashboard', DashboardController::class)
-            ->name('dashboard')
-            ->can('view-dashboard');;
+            ->name('dashboard');
+             //->can('view-dashboard');
+             
+        Route::resource('category', CategoryController::class);
         Route::resource('users', UserController::class);
         // Route::resource('cms', CmsController::class);
         Route::post('users/{user}/assign-role', [UserController::class, 'assignRole'])
